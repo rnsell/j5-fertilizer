@@ -8,5 +8,6 @@ const epicMiddleWare = createEpicMiddleware(rootEpic, {});
 const store = createStore(rootReducer, applyMiddleware(epicMiddleWare));
 
 module.exports = {
-    store
+    store,
+    dispatch: store.dispatch
 };

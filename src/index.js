@@ -1,11 +1,16 @@
+require("rxjs");
 const boardReady$ = require("../setup/board.setup.js");
-const { store } = require("./setup/store.setup.js");
-const { dispatch } = store;
-const { updateBoard1MotorA,
+const { dispatch } = require("./setup/store.setup.js");
+const { 
+	updateBoard1MotorA,
 	updateBoard1MotorB,
 	updateBoard2MotorA,
-	updateBoard2MotorB } = require("../motors.actions.js");
-const { board1, board2 }	= require("../setup/pump.sppeds.setup.js");
+	updateBoard2MotorB
+} = require("../motors.actions.js");
+const { 
+	board1,
+	board2
+ }	= require("../setup/pump.speeds.setup.js");
 
 
 const next = (allTheMotors) => {
