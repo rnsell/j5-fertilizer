@@ -11,9 +11,17 @@ const {
     startMotorTransaction,
     MOTOR_TRANSACTION_END
 } = require("../motor-transaction/motor.transaction.actions.js");
+
+const {
+    PUMP_STATES
+} = require("./pump.transaction.model.js");
 const { Observable } = require("rxjs");
 
-const startPumpEpic = (action$) => action$
+const startPumpEpic = (action$, store) => action$
+    .filter(() => {
+        const pumpState = store.getState().pump_transaction.state;
+        return pumpState === PUMP_STATES.READY || pumpState === PUMP_STATES.COMPLETE;
+    })
     .ofType(PUMP_TRANSACTION_START)
     .mergeMap(({ payload }) => {
         const { 
@@ -34,13 +42,13 @@ const startPumpEpic = (action$) => action$
         return Observable.from(pumpTransactions);
     });
 
-const completePumpEpic = (action$) => action$
+const completePumpEpic = (action$, store) => action$
     .ofType(MOTOR_TRANSACTION_END)
-    .take(4)
-    .takeLast(1)
-    .map(() => {
-        pumpsComplete()
-    });
+    // If the store has added all 4 motor transactions then this is the last one
+    .filter(() => {
+        return store.getState().motor_transactions.length === 4;
+    })
+    .map(() => pumpsComplete({}));
 
 module.exports = {
     startPumpEpic,

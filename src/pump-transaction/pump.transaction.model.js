@@ -2,7 +2,8 @@
 const PUMP_STATES = {
     RUNNING: "RUNNING",
     ERROR: "ERROR",
-    COMPLETE: "COMPLETE"
+    COMPLETE: "COMPLETE",
+    READY: "READY"
 };
 
 // Expected input
