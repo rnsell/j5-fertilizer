@@ -1,6 +1,7 @@
 require("rxjs");
+const PORT = 3000;
 const boardReady$ = require("../setup/board.setup.js");
-const { dispatch } = require("./setup/store.setup.js");
+const { dispatch, store } = require("./setup/store.setup.js");
 const { 
 	updateBoard1MotorA,
 	updateBoard1MotorB,
@@ -12,6 +13,7 @@ const {
 	board2
  }	= require("../setup/pump.speeds.setup.js");
 
+const { startWebServer } = require("./express/server.js")
 
 const next = (allTheMotors) => {
 	const { board1_motorA, board1_motorB, board2_motorA, board2_motorB } = allTheMotors;
@@ -22,6 +24,11 @@ const next = (allTheMotors) => {
 		updateBoard2MotorB({speed: board2.motorB, controller: board2_motorB})
 	];
 	futureActions.forEach(dispatch);
+	const dependencies = {
+		store,
+		dispatch
+	};
+	startWebServer({ dependencies, PORT });
 };
 
 const error = (err) => {

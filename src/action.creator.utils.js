@@ -1,3 +1,3 @@
-const factAction = (type) => (payload) => ({type, payload});
+const fastAction = (type) => (payload) => ({type, payload});
 
-module.exports = { factAction };
+module.exports = { fastAction };

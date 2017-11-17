@@ -1,4 +1,4 @@
-const { factAction } = require("../action.creator.utils.js");
+const { fastAction } = require("../action.creator.utils.js");
 
 // PUMP_TRANSACTION_START
 // volume: {
@@ -11,13 +11,13 @@ const { factAction } = require("../action.creator.utils.js");
 // state: running, error, complete
 
 const PUMP_TRANSACTION_START = "PUMP_TRANSACTION_START";
-const pumpsStarted = factAction(PUMP_TRANSACTION_START);
+const pumpsStarted = fastAction(PUMP_TRANSACTION_START);
 
 const PUMP_TRANSACTION_ERROR = "PUMP_TRANSACTION_ERROR";
-const pumpsError = factAction(PUMP_TRANSACTION_ERROR);
+const pumpsError = fastAction(PUMP_TRANSACTION_ERROR);
 
 const PUMP_TRANSACTION_COMPLETE = "PUMP_TRANSACTION_COMPLETE";
-const pumpsComplete = factAction(PUMP_TRANSACTION_COMPLETE);
+const pumpsComplete = fastAction(PUMP_TRANSACTION_COMPLETE);
 
 module.exports = {
     PUMP_TRANSACTION_START,
