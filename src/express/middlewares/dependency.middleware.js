@@ -4,4 +4,6 @@ const dependencyMiddleware$H = ({ dependencies }) => (req, res, next) => {
     next();
 };
 
-module.exports = dependencyMiddleware$H;
+module.exports = {
+    dependencyMiddleware$H
+};
