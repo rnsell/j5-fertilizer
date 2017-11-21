@@ -1,4 +1,5 @@
-const { MOTOR_NAMES }= require("./motor.transactions.models.js");
+const { MOTOR_NAMES }= require("./motor.transaction.model.js");
+const { Observable } = require("rxjs/Rx");
 
 const selectTheMotor = (
     {
@@ -30,6 +31,30 @@ const selectTheMotor = (
     return selectedMotor;
 };
 
+/**
+ * generatePumpEvents
+ *
+ * @param {Object} obj - An object.
+ * @param {number} obj.clockTime - Property 1.
+ * @param {number} obj.pumpSpeed - Property 2.
+ * @param {number} obj.totalVolume - Property 2.
+ * @return {Observable} - Observable that emits 1 event the otal volume after done pumping.
+ */
+const generatePumpEvents = function ({clockTime, pumpSpeed, totalVolume}) {
+    return Observable.interval(clockTime)
+    .map((timeIncrement) => {
+        const totalTime = timeIncrement * clockTime;
+        const currentVolume = pumpSpeed * totalTime;
+        return currentVolume;
+    })
+    .takeWhile(currentVolume => {
+        currentVolume < totalVolume;
+    })
+    .takeLast(1);
+};
+
+
 module.exports = {
-    selectTheMotor
+    selectTheMotor,
+    generatePumpEvents
 };

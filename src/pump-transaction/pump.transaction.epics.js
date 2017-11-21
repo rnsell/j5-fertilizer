@@ -5,7 +5,7 @@ const {
 
 const {
     mapPumpTransactionToMotorTransaction
-} = require("./pump.transaction.epic.util.js");
+} = require("./pump.transaction.epics.util.js");
 
 const {
     startMotorTransaction,

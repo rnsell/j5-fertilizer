@@ -1,6 +1,6 @@
+const five = require("johnny-five");
 const Rx = require("rxjs");
 const { Observable } = Rx;
-const five = require("johnny-five");
 const ports = [
   { id: "RIGHT_BOARD" },
   { id: "LEFT_BOARD" }
@@ -19,17 +19,17 @@ const boardOpts = {
 const configs = five.Motor.SHIELD_CONFIGS.ARDUINO_MOTOR_SHIELD_R3_1;
 const boards = five.Boards(boardOpts);
 
-const boardReady$ = Observable.create((observ) => {
+const boardReady$ = Observable.create((observer) => {
   boards.on("ready", function () {
     const allTheBoards = [];
-    const extractBoards$H = (array) => function (board) {
+    const extractBoards$H = (array) => (board) => {
       array.push(board);
-	};
-	this.each(extractBoards$H(allTheBoards));		
-    observ.next(allTheBoards);
+	  };
+    this.each(extractBoards$H(allTheBoards));		
+    observer.next(allTheBoards);
   });
 })
-.map(allTheBoards => {
+.map((allTheBoards) => {
     const pinBoardMap$H = (pins) => (board) => new five.Motor({ pins, board });
     const aMotors = allTheBoards.map(pinBoardMap$H(configs.A.pins));
     const bMotors = allTheBoards.map(pinBoardMap$H(configs.B.pins));

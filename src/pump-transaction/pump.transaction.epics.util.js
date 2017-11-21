@@ -3,6 +3,17 @@ const {
     MOTOR_NAMES,
 } = require("../motor-transaction/motor.transaction.model.js");
 
+/**
+ * mapPumpTransactionToMotorTransaction
+ *
+ * @param {Object} obj - An object.
+ * @param {number} obj.pumpTransactionId - Property 1.
+ * @param {Object} obj.board1_motorA_volume - Property 2.
+ * @param {Object} obj.board1_motorB_volume - Property 2.
+ * @param {Object} obj.board2_motorA_volume - Property 2.
+ * @param {Object} obj.board2_motorB_volume - Property 2.
+ * @return {Array} - Array of motor transactions that need to run
+ */
 let mapPumpTransactionToMotorTransaction = ({
     pumpTransactionId,
     board1_motorA_volume,
