@@ -13,6 +13,10 @@ const { fastAction } = require("../action.creator.utils.js");
 const PUMP_TRANSACTION_START = "PUMP_TRANSACTION_START";
 const pumpsStarted = fastAction(PUMP_TRANSACTION_START);
 
+const PUMP_TRANSACTION_RUNNING = "PUMP_TRANSACTION_RUNNING";
+const pumpsRunning = fastAction(PUMP_TRANSACTION_RUNNING);
+
+
 const PUMP_TRANSACTION_ERROR = "PUMP_TRANSACTION_ERROR";
 const pumpsError = fastAction(PUMP_TRANSACTION_ERROR);
 
@@ -22,6 +26,8 @@ const pumpsComplete = fastAction(PUMP_TRANSACTION_COMPLETE);
 module.exports = {
     PUMP_TRANSACTION_START,
     pumpsStarted,
+    PUMP_TRANSACTION_RUNNING,
+    pumpsRunning,
     PUMP_TRANSACTION_ERROR,
     pumpsError,
     PUMP_TRANSACTION_COMPLETE,

@@ -25,6 +25,7 @@ const startMotorsEpic = (action$, store) => action$
         // Emits an event after the p
         return generatePumpEvents({clockTime, pumpSpeed, totalVolume})
             .map((totalVolume) => {
+                controller.stop();
                 const finishedMotorTransaction = Object.assign({}, payload);
                 finishedMotorTransaction.state = MOTOR_STATES.COMPLETE;
                 finishedMotorTransaction.currentVolume = totalVolume;

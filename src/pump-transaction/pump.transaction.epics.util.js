@@ -28,10 +28,10 @@ let mapPumpTransactionToMotorTransaction = ({
         board2_motorB
     } = MOTOR_NAMES;
     const allTheTransaction = [    
-        new MotorTransaction({pumpTransactionId, board1_motorA, board1_motorA_volume}),
-        new MotorTransaction({pumpTransactionId, board1_motorB, board1_motorB_volume}),
-        new MotorTransaction({pumpTransactionId, board2_motorA, board2_motorA_volume}),
-        new MotorTransaction({pumpTransactionId, board2_motorB, board2_motorB_volume})
+        new MotorTransaction({pumpTransactionId, motorName: board1_motorA, totalVolume: board1_motorA_volume}),
+        new MotorTransaction({pumpTransactionId, motorName: board1_motorB, totalVolume: board1_motorB_volume}),
+        new MotorTransaction({pumpTransactionId, motorName: board2_motorA, totalVolume: board2_motorA_volume}),
+        new MotorTransaction({pumpTransactionId, motorName: board2_motorB, totalVolume: board2_motorB_volume})
     ];
     return allTheTransaction;
 };

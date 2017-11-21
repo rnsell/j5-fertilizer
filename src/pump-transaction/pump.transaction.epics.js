@@ -1,6 +1,7 @@
 const {
     PUMP_TRANSACTION_START,
-    pumpsComplete
+    pumpsComplete,
+    pumpsRunning,
 } = require("./pump.transaction.actions.js");
 
 const {
@@ -18,11 +19,11 @@ const {
 const { Observable } = require("rxjs");
 
 const startPumpEpic = (action$, store) => action$
-    .filter(() => {
+    .ofType(PUMP_TRANSACTION_START)
+    .filter((action) => {
         const pumpState = store.getState().pump_transaction.state;
         return pumpState === PUMP_STATES.READY || pumpState === PUMP_STATES.COMPLETE;
     })
-    .ofType(PUMP_TRANSACTION_START)
     .mergeMap(({ payload }) => {
         const { 
             pumpTransactionId,
@@ -39,6 +40,8 @@ const startPumpEpic = (action$, store) => action$
             board2_motorB_volume
         })
         .map(startMotorTransaction);
+        const pumpsRunningAction = pumpsRunning({});
+        pumpTransactions.push(pumpsRunningAction);
         return Observable.from(pumpTransactions);
     });
 
@@ -46,7 +49,8 @@ const completePumpEpic = (action$, store) => action$
     .ofType(MOTOR_TRANSACTION_END)
     // If the store has added all 4 motor transactions then this is the last one
     .filter(() => {
-        return store.getState().motor_transactions.length === 4;
+        const { motor_transactions } = store.getState();
+        return motor_transactions.length === 4;
     })
     .map(() => pumpsComplete({}));
 

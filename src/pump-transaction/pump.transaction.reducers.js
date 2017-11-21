@@ -1,5 +1,5 @@
 const { 
-  PUMP_TRANSACTION_START,
+  PUMP_TRANSACTION_RUNNING,
   PUMP_TRANSACTION_ERROR,
   PUMP_TRANSACTION_COMPLETE,
 } = require("./pump.transaction.actions.js");
@@ -9,16 +9,18 @@ const defaultState = {
 };
 const pumpTransactionReducer = (state = defaultState, action) => {
     const { type, payload } = action;
+    const newState = Object.assign({}, state);
     switch(type) {
-        case PUMP_TRANSACTION_START: 
-            return payload;
+        case PUMP_TRANSACTION_RUNNING: 
+            newState.state = PUMP_STATES.RUNNING;
+            return newState;
         case PUMP_TRANSACTION_COMPLETE:
-            state.state = PUMP_STATES.COMPLETE;
-            return state;
+            newState.state = PUMP_STATES.COMPLETE;
+            return newState;
         case PUMP_TRANSACTION_ERROR:
-            state.error = payload;
-            state.state = PUMP_STATES.ERROR;
-            return state;
+            newState.error = payload;
+            newState.state = PUMP_STATES.ERROR;
+            return newState;
         default:
             return state;
     }

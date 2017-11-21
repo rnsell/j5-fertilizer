@@ -47,9 +47,7 @@ const generatePumpEvents = function ({clockTime, pumpSpeed, totalVolume}) {
         const currentVolume = pumpSpeed * totalTime;
         return currentVolume;
     })
-    .takeWhile(currentVolume => {
-        currentVolume < totalVolume;
-    })
+    .takeWhile(currentVolume => currentVolume < totalVolume)
     .takeLast(1);
 };
 

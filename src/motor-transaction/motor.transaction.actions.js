@@ -1,6 +1,6 @@
 const { fastAction } = require("../action.creator.utils.js");
 
-const MOTOR_TRANSACTION_START = "PUMP_TRANSACTION_START";
+const MOTOR_TRANSACTION_START = "MOTOR_TRANSACTION_START";
 const startMotorTransaction = fastAction(MOTOR_TRANSACTION_START);
 
 const MOTOR_TRANSACTION_END = "MOTOR_TRANSACTION_END";
