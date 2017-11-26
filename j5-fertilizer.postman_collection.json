@@ -1,0 +1,53 @@
+{
+	"variables": [],
+	"info": {
+		"name": "j5-fertilizer",
+		"_postman_id": "01011026-0e7c-f3d8-6c78-9ab8b0bb4916",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/health",
+			"request": {
+				"url": "localhost:3000/health",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/store",
+			"request": {
+				"url": "localhost:3000/store",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/pump-transaction",
+			"request": {
+				"url": "localhost:3000/pump-transaction",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{     \n     \"motorVolumes\": {\n       \"board1_motorA_volume\": 10, \n       \"board1_motorB_volume\": 10, \n       \"board2_motorA_volume\": 10, \n       \"board2_motorB_volume\": 10\n     }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
